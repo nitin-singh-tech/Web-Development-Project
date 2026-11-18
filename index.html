@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>📚 Study Planner</h1>
+      <p>Plan your tasks, track deadlines and watch your progress grow.</p>
+    </div>
+    <button id="theme" class="ghost" type="button" aria-label="Switch light and dark mode">🌙 Dark mode</button>
+  </header>
+
+  <main>
+    <!-- Numbers and overall progress -->
+    <section class="stats" aria-label="Summary">
+      <div class="card"><b id="s-total">0</b><span>Total tasks</span></div>
+      <div class="card"><b id="s-done">0</b><span>Completed</span></div>
+      <div class="card"><b id="s-pending">0</b><span>Pending</span></div>
+      <div class="card late"><b id="s-late">0</b><span>Overdue</span></div>
+    </section>
+
+    <section class="card overall">
+      <div class="row"><strong>Overall progress</strong><strong id="pct">0%</strong></div>
+      <div class="bar"><i id="bar"></i></div>
+    </section>
+
+    <div class="layout">
+      <!-- Add or edit a task -->
+      <section class="card">
+        <h2 id="form-title">Add a task</h2>
+        <form id="form" novalidate>
+          <label for="title">Task</label>
+          <input id="title" maxlength="80" placeholder="e.g. Finish Chapter 4 notes">
+
+          <label for="subject">Subject</label>
+          <input id="subject" list="subject-list" maxlength="30" placeholder="e.g. Mathematics">
+          <datalist id="subject-list"></datalist>
+
+          <div class="two">
+            <div>
+              <label for="deadline">Deadline</label>
+              <input id="deadline" type="date">
+            </div>
+            <div>
+              <label for="priority">Priority</label>
+              <select id="priority">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <p id="error" class="error" role="alert"></p>
+          <div class="actions">
+            <button id="save" class="primary" type="submit">Add task</button>
+            <button id="cancel" class="ghost" type="button" hidden>Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Task list -->
+      <section class="card">
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Search tasks or subjects">
+          <select id="sort" aria-label="Sort tasks">
+            <option value="deadline">Sort: deadline</option>
+            <option value="priority">Sort: priority</option>
+            <option value="subject">Sort: subject</option>
+          </select>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="pill on" data-f="all" type="button">All</button>
+          <button class="pill" data-f="today" type="button">Due today</button>
+          <button class="pill" data-f="pending" type="button">Pending</button>
+          <button class="pill" data-f="overdue" type="button">Overdue</button>
+          <button class="pill" data-f="done" type="button">Done</button>
+        </div>
+
+        <ul id="list" class="list"></ul>
+        <p id="empty" class="empty">No tasks here yet. Add your first task on the left.</p>
+
+        <div class="actions end">
+          <button id="export" class="ghost" type="button">⬇ Download CSV</button>
+          <button id="clear" class="ghost danger" type="button">Clear completed</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Progress for each subject -->
+    <section class="card">
+      <h2>Progress by subject</h2>
+      <div id="subjects"></div>
+      <p id="no-subj" class="empty">Subjects will appear here after you add tasks.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

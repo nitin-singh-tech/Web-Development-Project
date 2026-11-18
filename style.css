@@ -1,0 +1,231 @@
+/* ===== Colours (change these to restyle the whole app) ===== */
+:root {
+  --bg: #f4f6fb; --card: #ffffff; --text: #1b2438; --muted: #65738a; --line: #e3e8f0;
+  --accent: #4f46e5; --accent-dark: #3d35c4; --soft: #eef0ff;
+  --high: #d92d3a; --medium: #d98a06; --low: #1f9d63; --late: #d92d3a;
+}
+[data-theme="dark"] {
+  --bg: #0f1623; --card: #172033; --text: #eef2f8; --muted: #9aa8bf; --line: #2a3650;
+  --accent: #818cf8; --accent-dark: #6366f1; --soft: #232c52;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); }
+h1, h2 { margin: 0; }
+h2 { font-size: 18px; margin-bottom: 12px; }
+main, .top { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+main { padding-bottom: 40px; display: grid; gap: 16px; }
+
+/* ===== Header ===== */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 24px; padding-bottom: 18px; }
+.top p { margin: 4px 0 0; color: var(--muted); }
+
+/* ===== Cards and numbers ===== */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.stats .card { text-align: center; }
+.stats b { display: block; font-size: 30px; line-height: 1.1; color: var(--accent); }
+.stats .late b { color: var(--late); }
+.stats span { color: var(--muted); font-size: 13px; }
+
+.row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.bar { height: 12px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .35s; }
+
+.layout { display: grid; grid-template-columns: 340px 1fr; gap: 16px; align-items: start; }
+
+/* ===== Form ===== */
+label { display: block; margin: 12px 0 4px; font-size: 13px; font-weight: 600; }
+input, select { width: 100%; padding: 10px 12px; font: inherit; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+input:focus, select:focus, button:focus-visible { outline: 3px solid var(--soft); border-color: var(--accent); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.error { min-height: 20px; margin: 8px 0 0; color: var(--late); font-size: 13px; }
+
+/* ===== Buttons ===== */
+button { font: inherit; cursor: pointer; border-radius: 10px; padding: 9px 14px; border: 1px solid var(--line); background: var(--card); color: var(--text); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; flex: 1; }
+button.primary:hover { background: var(--accent-dark); }
+button.ghost:hover { background: var(--soft); }
+button.danger { color: var(--late); }
+.actions { display: flex; gap: 8px; margin-top: 8px; }
+.actions.end { justify-content: flex-end; margin-top: 14px; }
+
+/* ===== Search, filters, list ===== */
+.toolbar { display: grid; grid-template-columns: 1fr 170px; gap: 10px; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0; }
+.pill { border-radius: 99px; padding: 5px 12px; font-size: 13px; color: var(--muted); }
+.pill.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.task { display: grid; grid-template-columns: auto 1fr auto auto; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; }
+.task input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); }
+.task.done strong { text-decoration: line-through; color: var(--muted); }
+.task button { padding: 6px 10px; font-size: 13px; }
+.meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 4px; font-size: 12px; }
+.chip { background: var(--soft); color: var(--accent); padding: 2px 10px; border-radius: 99px; font-weight: 600; }
+.tag { padding: 2px 8px; border-radius: 99px; color: #fff; text-transform: capitalize; }
+.tag.high { background: var(--high); } .tag.medium { background: var(--medium); } .tag.low { background: var(--low); }
+.when { color: var(--muted); }
+.when.late { color: var(--late); font-weight: 700; }
+.when.now { color: var(--medium); font-weight: 700; }
+.empty { color: var(--muted); text-align: center; margin: 18px 0 4px; }
+
+/* ===== Progress by subject ===== */
+.subj { margin-bottom: 12px; }
+.subj .row { margin-bottom: 4px; font-size: 14px; }
+
+/* ===== Phones ===== */
+@media (max-width: 800px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .layout { grid-template-columns: 1fr; }
+  .toolbar { grid-template-columns: 1fr; }
+  .task { grid-template-columns: auto 1fr; }
+  .task button { grid-column: 2; justify-self: start; }
+}
+
+
+/* ===== Extra polish: paste this at the END of style.css ===== */
+
+/* Softer page background */
+body {
+  background:
+    radial-gradient(circle at 10% -10%, var(--soft), transparent 45%),
+    radial-gradient(circle at 100% 0%, var(--soft), transparent 40%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+/* Header */
+.top h1 { font-size: clamp(26px, 4vw, 36px); letter-spacing: -.5px; }
+.top { padding-top: 32px; padding-bottom: 22px; }
+
+/* Cards get depth */
+.card {
+  box-shadow: 0 1px 2px rgba(20, 30, 60, .04), 0 8px 24px rgba(20, 30, 60, .06);
+  transition: transform .2s, box-shadow .2s;
+}
+.stats .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(20, 30, 60, .12); }
+
+/* Coloured top edge on each summary card */
+.stats .card { border-top: 4px solid var(--accent); }
+.stats .card:nth-child(2) { border-top-color: var(--low); }
+.stats .card:nth-child(2) b { color: var(--low); }
+.stats .card:nth-child(3) { border-top-color: var(--medium); }
+.stats .card:nth-child(3) b { color: var(--medium); }
+.stats .card.late { border-top-color: var(--late); }
+
+/* Progress bars */
+.bar { height: 14px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, .12); }
+.bar i { background: linear-gradient(90deg, var(--accent), #a78bfa); }
+.overall strong:last-child { color: var(--accent); font-size: 18px; }
+
+/* Buttons */
+button { transition: background .15s, transform .15s, box-shadow .15s; }
+button:hover { transform: translateY(-1px); }
+button:active { transform: translateY(0); }
+button.primary { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); box-shadow: 0 6px 16px rgba(79, 70, 229, .35); }
+button.primary:hover { box-shadow: 0 8px 20px rgba(79, 70, 229, .45); }
+button.danger:hover { background: rgba(217, 45, 58, .1); }
+
+/* Form fields */
+input, select { transition: border-color .15s, box-shadow .15s; }
+input:hover, select:hover { border-color: var(--accent); }
+input:focus, select:focus { box-shadow: 0 0 0 4px var(--soft); }
+
+/* Filter pills */
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+.pill.on:hover { color: #fff; }
+
+/* Task rows: coloured stripe by priority */
+.task { border-left: 5px solid var(--line); background: var(--card); transition: transform .15s, box-shadow .15s; }
+.task:hover { transform: translateX(3px); box-shadow: 0 6px 18px rgba(20, 30, 60, .1); }
+.task:has(.tag.high)   { border-left-color: var(--high); }
+.task:has(.tag.medium) { border-left-color: var(--medium); }
+.task:has(.tag.low)    { border-left-color: var(--low); }
+.task.done { opacity: .6; }
+.task strong { font-size: 15px; }
+
+/* Empty messages */
+.empty { padding: 22px; border: 2px dashed var(--line); border-radius: 12px; }
+
+/* Phones: tighter spacing */
+@media (max-width: 800px) {
+  .top { padding-top: 22px; }
+  .card { padding: 14px; }
+}
+
+/* Respect people who turn animations off */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ===== Background + look from the reference picture =====
+   Paste this at the very END of style.css (after style-extra.css).
+   Keep the image in the SAME folder as index.html and style.css. */
+
+/* 1. Background image (replaces the earlier gradient background) */
+body {
+  background: #f4f1ff url("study_planner_background_image.png") center / cover no-repeat fixed;
+  min-height: 100vh;
+}
+
+/* 2. Header: make the title bigger and keep the button as a soft pill */
+.top h1 { font-size: clamp(30px, 4.5vw, 46px); color: #1b1650; }
+#theme { border-radius: 99px; padding: 10px 20px; background: rgba(255, 255, 255, .9); box-shadow: 0 6px 18px rgba(79, 70, 229, .15); }
+
+/* 3. Cards: white and slightly see-through so the picture shows around them */
+.card {
+  background: rgba(255, 255, 255, .92);
+  border-radius: 20px;
+  border-color: rgba(255, 255, 255, .7);
+  box-shadow: 0 10px 30px rgba(79, 70, 229, .10);
+}
+
+/* 4. Summary cards: icon circle on the left, number and label on the right */
+.stats .card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 16px;
+  align-items: center;
+  text-align: left;
+  padding: 20px 22px;
+}
+.stats .card::before {
+  grid-row: 1 / 3;
+  width: 54px; height: 54px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 24px; color: #fff;
+  background: var(--accent);
+  box-shadow: 0 6px 14px rgba(79, 70, 229, .35);
+}
+.stats .card:nth-child(1)::before { content: "✔"; }
+.stats .card:nth-child(2)::before { content: "⚑"; background: var(--low);    box-shadow: 0 6px 14px rgba(31, 157, 99, .35); }
+.stats .card:nth-child(3)::before { content: "⏱"; background: var(--medium); box-shadow: 0 6px 14px rgba(217, 138, 6, .35); }
+.stats .card:nth-child(4)::before { content: "!";  background: var(--late);   box-shadow: 0 6px 14px rgba(217, 45, 58, .35); font-weight: 800; }
+
+/* soft colour wash on each summary card */
+.stats .card:nth-child(1) { background: linear-gradient(135deg, #fff 55%, #eceaff); }
+.stats .card:nth-child(2) { background: linear-gradient(135deg, #fff 55%, #e6f6ee); }
+.stats .card:nth-child(3) { background: linear-gradient(135deg, #fff 55%, #fff1d9); }
+.stats .card:nth-child(4) { background: linear-gradient(135deg, #fff 55%, #fde7ea); }
+
+/* 5. Rounder inputs and search box */
+input, select { border-radius: 14px; background: rgba(255, 255, 255, .95); }
+.toolbar input, .toolbar select { border-radius: 99px; padding-left: 18px; }
+.pill { background: rgba(255, 255, 255, .9); }
+.pill.on { background: var(--accent); }
+
+/* 6. Dark mode: the picture is light, so use the plain dark look instead */
+[data-theme="dark"] body { background: var(--bg); }
+[data-theme="dark"] .card { background: var(--card); border-color: var(--line); box-shadow: none; }
+[data-theme="dark"] .top h1 { color: var(--text); }
+[data-theme="dark"] #theme { background: var(--card); }
+[data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] .pill { background: var(--card); }
+[data-theme="dark"] .stats .card:nth-child(n) { background: var(--card); }
+
+/* 7. Small phones: stack the icon above the numbers */
+@media (max-width: 800px) {
+  body { background-attachment: scroll; background-position: top center; }
+  .stats .card { padding: 14px; column-gap: 10px; }
+  .stats .card::before { width: 42px; height: 42px; font-size: 18px; }
+}
